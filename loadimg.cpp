@@ -121,8 +121,17 @@ void findBrightSpot(Mat m) {
     Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
     drawContours( drawing, contours_poly, i, color, 1, 8, std::vector<Vec4i>(), 0, Point() );
     //rectangle( drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
+    //std::cout << i << ": (" << center[i].x << ", " << center[i].y << ")\n";
     circle( drawing, center[i], (int)radius[i], color, 2, 8, 0 );
   }
+
+  double cp = center[0].x;
+  double x = (center[1].x - cp) / (cp);
+  double y = (cp - center[1].y ) / (cp);
+  double z = std::sqrt(1.0 - std::sqrt(x*x+y*y));
+
+  std::cout << "(x,y,z): (" << x << ", " << y << ", " << z << ") \n";
+
 
   imshow(window_name, drawing ); // show frame on computer output window
 
